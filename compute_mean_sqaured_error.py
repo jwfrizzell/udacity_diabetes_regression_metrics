@@ -20,14 +20,17 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20,
 	random_state=1)
 
 reg1 = DecisionTreeRegressor()
-reg1.fit(X, y)
-print "Decision Tree mean absolute error: {:.2f}".format(mse(y, reg1.predict(X)))
+reg1.fit(X_train, y_train)#Fit training set to Decision tree regression.
+mean_squared_error_dtr = mse(y_test, reg1.predict(X_test))
+print("Decision Tree mean absolute error: {:.2f}".format(mean_squared_error_dtr))
 
 reg2 = LinearRegression()
-reg2.fit(X, y)
-print "Linear regression mean absolute error: {:.2f}".format(mse(y, reg2.predict(X)))
+reg2.fit(X_train, y_train)#Fit training set to Linear regression model.
+mean_squared_error_lr = mse(y_test,reg2.predict(X_test))
+
+print("Linear regression mean absolute error: {:.2f}".format(mean_squared_error_lr))
 
 results = {
- "Linear Regression": 0,
- "Decision Tree": 0
+ "Linear Regression": mean_squared_error_lr,
+ "Decision Tree": mean_squared_error_dtr
 }
